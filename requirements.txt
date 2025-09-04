@@ -1,0 +1,37 @@
+# Draugr v2.0 - Requirements File
+# Python 3.7+ required
+
+# Core Web Scraping Libraries
+requests>=2.31.0
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+urllib3>=2.0.4
+
+# GUI Framework
+PyQt5>=5.15.9
+PyQt5-Qt5>=5.15.2
+PyQt5-sip>=12.12.2
+
+# JavaScript Rendering (Optional but Recommended)
+selenium>=4.11.2
+
+# Database
+# SQLite3 is included with Python standard library
+
+# Additional Dependencies
+certifi>=2023.7.22  # SSL certificate verification
+
+# Development Dependencies (Optional)
+# Uncomment if needed for development
+# pyinstaller>=5.13.0  # For creating standalone executables
+# pytest>=7.4.0  # For running tests
+# black>=23.7.0  # Code formatter
+# pylint>=2.17.5  # Code linter
+
+# Note: Browser Drivers Required for Selenium
+# These must be downloaded separately:
+# ChromeDriver: https://chromedriver.chromium.org/
+# GeckoDriver: https://github.com/mozilla/geckodriver/releases
+# 
+# After downloading, add driver executables to your system PATH
+# or specify the path in the code
