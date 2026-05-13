@@ -21,8 +21,9 @@ type BrowserPool struct {
 
 // NewBrowserPool creates and starts a shared headless Chrome instance.
 // slots is cfg.JSWorkers (default 3).
-func NewBrowserPool(ctx context.Context, slots int, log *zap.Logger) (*BrowserPool, error) {
+func NewBrowserPool(ctx context.Context, slots int, execPath string, log *zap.Logger) (*BrowserPool, error) {
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
+		chromedp.ExecPath(execPath),
 		chromedp.NoFirstRun,
 		chromedp.NoDefaultBrowserCheck,
 		chromedp.Headless,
