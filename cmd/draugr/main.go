@@ -116,6 +116,10 @@ func main() {
 			if err := c.Run(ctx); err != nil {
 				return fmt.Errorf("crawler: %w", err)
 			}
+
+			// Wait for pages channel to close (crawl complete or ctx cancelled)
+			for range c.Pages() {}
+
 			return nil
 		},
 	}
