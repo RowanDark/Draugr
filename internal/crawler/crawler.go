@@ -28,6 +28,7 @@ type Crawler struct {
 	done      chan struct{}
 	wg        sync.WaitGroup // tracks in-flight queue items
 	pageCount atomic.Int64
+	pool      *BrowserPool // nil when --js is not set
 }
 
 type queueItem struct {
@@ -72,6 +73,15 @@ func (c *Crawler) Run(ctx context.Context) error {
 		return fmt.Errorf("invalid URL: %w", err)
 	}
 	c.domain = baseURL.Host
+
+	if c.cfg.UseJS {
+		pool, err := NewBrowserPool(ctx, c.cfg.JSWorkers, c.log)
+		if err != nil {
+			return fmt.Errorf("browser pool: %w", err)
+		}
+		c.pool = pool
+		defer c.pool.Close()
+	}
 
 	var workerWg sync.WaitGroup
 	for i := 0; i < c.cfg.Workers; i++ {
@@ -137,6 +147,20 @@ func (c *Crawler) processItem(ctx context.Context, item queueItem) {
 		return
 	}
 	page.Depth = item.depth
+
+	if c.pool != nil {
+		rendered, err := c.pool.Render(ctx, item.url)
+		if err != nil {
+			c.log.Warn("browser render failed",
+				zap.String("url", item.url),
+				zap.Error(err),
+			)
+			// fall through: send the HTTP-fetched page as-is
+		} else {
+			page.Body = rendered
+			page.FromJS = true
+		}
+	}
 
 	select {
 	case c.pages <- page:
