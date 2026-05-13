@@ -1,0 +1,66 @@
+kit: headers
+patterns:
+  # Missing CSP Header — dropped: Python regex uses negative lookahead (?!...) which RE2 does not support
+  # Missing X-Frame-Options — dropped: Python regex uses negative lookahead (?!...) which RE2 does not support
+  # Missing X-Content-Type — dropped: Python regex uses negative lookahead (?!...) which RE2 does not support
+  # Missing HSTS — dropped: Python regex uses negative lookahead (?!...) which RE2 does not support
+
+  - name: Server Version Disclosure
+    regex: '(?i)(?:server|x-powered-by):\s*[a-zA-Z]+/[\d.]+'
+    category: Security Headers & Vulnerabilities
+    severity: medium
+
+  - name: PHP Version Disclosure
+    regex: '(?i)x-powered-by:\s*php/[\d.]+'
+    category: Security Headers & Vulnerabilities
+    severity: medium
+
+  - name: ASP.NET Version
+    regex: '(?i)x-aspnet-version:\s*[\d.]+'
+    category: Security Headers & Vulnerabilities
+    severity: medium
+
+  - name: Vulnerable jQuery
+    regex: 'jquery(?:\.min)?\.js\?v=([0-2]\.|3\.[0-3])'
+    category: Security Headers & Vulnerabilities
+    severity: high
+
+  - name: SQL Injection Point
+    regex: '(?i)(?:select|insert|update|delete|union|from|where).*(?:\$_GET|\$_POST|\$_REQUEST)'
+    category: Security Headers & Vulnerabilities
+    severity: high
+
+  - name: XSS Vulnerable
+    regex: '(?i)(?:document\.write|innerHTML|eval)\s*\([^)]*(?:\$_GET|\$_POST|location\.)'
+    category: Security Headers & Vulnerabilities
+    severity: high
+
+  - name: Path Traversal
+    regex: '(?:\.\.\/|\.\.\\){2,}'
+    category: Security Headers & Vulnerabilities
+    severity: high
+
+  - name: Command Injection
+    regex: '(?i)(?:exec|system|shell_exec|passthru|eval|cmd)\s*\('
+    category: Security Headers & Vulnerabilities
+    severity: high
+
+  - name: CORS Misconfiguration
+    regex: '(?i)access-control-allow-origin:\s*\*'
+    category: Security Headers & Vulnerabilities
+    severity: high
+
+  - name: Debug Mode Enabled
+    regex: '(?i)(?:debug|DEBUG)\s*[:=]\s*(?:true|1|on|enabled)'
+    category: Security Headers & Vulnerabilities
+    severity: medium
+
+  - name: Stack Trace Exposed
+    regex: '(?i)(?:exception|error|stack\s*trace|traceback)'
+    category: Security Headers & Vulnerabilities
+    severity: medium
+
+  - name: TODO Comments
+    regex: '(?i)(?:TODO|FIXME|HACK|XXX|BUG):\s*(.+)'
+    category: Security Headers & Vulnerabilities
+    severity: low
