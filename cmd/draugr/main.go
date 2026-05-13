@@ -1,11 +1,15 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
 	"github.com/RowanDark/draugr/internal/config"
+	"github.com/RowanDark/draugr/internal/crawler"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
@@ -70,7 +74,26 @@ func main() {
 				zap.String("db_path", cfg.DBPath),
 			)
 
-			fmt.Println("draugr: scaffold OK — crawler not yet implemented")
+			ctx, cancel := signal.NotifyContext(context.Background(),
+				syscall.SIGINT, syscall.SIGTERM)
+			defer cancel()
+
+			c := crawler.New(cfg, logger)
+
+			// Consume pages channel (Issue #3 will replace this)
+			go func() {
+				for page := range c.Pages() {
+					logger.Info("fetched",
+						zap.String("url", page.URL),
+						zap.Int("status", page.StatusCode),
+						zap.Int("body_len", len(page.Body)),
+					)
+				}
+			}()
+
+			if err := c.Run(ctx); err != nil {
+				return fmt.Errorf("crawler: %w", err)
+			}
 			return nil
 		},
 	}
