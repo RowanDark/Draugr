@@ -75,7 +75,7 @@ func (c *Crawler) Run(ctx context.Context) error {
 	c.domain = baseURL.Host
 
 	if c.cfg.UseJS {
-		pool, err := NewBrowserPool(ctx, c.cfg.JSWorkers, c.log)
+		pool, err := NewBrowserPool(ctx, c.cfg.JSWorkers, c.cfg.ChromePath, c.log)
 		if err != nil {
 			return fmt.Errorf("browser pool: %w", err)
 		}

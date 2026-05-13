@@ -19,4 +19,5 @@ type Config struct {
 	NoRobots   bool
 	UseDB      bool
 	DBPath     string
+	ChromePath string  // path to Chrome/Chromium binary
 }

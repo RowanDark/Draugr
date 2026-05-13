@@ -137,6 +137,8 @@ func main() {
 	f.BoolVar(&cfg.NoRobots, "no-robots", false, "Ignore robots.txt")
 	f.BoolVar(&cfg.UseDB, "db", false, "Enable SQLite persistence")
 	f.StringVar(&cfg.DBPath, "db-path", "draugr.db", "SQLite file path")
+	f.StringVar(&cfg.ChromePath, "chrome-path", "/usr/bin/google-chrome",
+		"Path to Chrome or Chromium binary for JS rendering")
 
 	cobra.MarkFlagRequired(f, "url") //nolint:errcheck
 
