@@ -1,0 +1,71 @@
+kit: javascript
+patterns:
+  - name: JS API Variable
+    regex: '(?:var|let|const)\s+(?:api|API)[a-zA-Z]*\s*=\s*["'']([^"'']+)["'']'
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS Token Variable
+    regex: '(?:var|let|const)\s+[a-zA-Z]*(?:token|Token|KEY|Key)\s*=\s*["'']([^"'']+)["'']'
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS Config Object
+    regex: '(?:config|settings|options)\s*=\s*\{[^}]*(?:key|token|secret|password)[^}]*\}'
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS Fetch with Auth
+    regex: 'fetch\([^)]+headers[^)]*(?:Authorization|authorization)[^)]+\)'
+    category: JavaScript Specific
+    severity: medium
+
+  - name: JS XMLHttpRequest Auth
+    regex: 'setRequestHeader\(["''](?:Authorization|X-API-Key)["'']'
+    category: JavaScript Specific
+    severity: medium
+
+  - name: JS localStorage Sensitive
+    regex: 'localStorage\.(?:get|set)Item\(["''](?:token|key|password|secret)["'']'
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS sessionStorage Sensitive
+    regex: 'sessionStorage\.(?:get|set)Item\(["''](?:token|key|password|secret)["'']'
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS Window Variable
+    regex: 'window\.[a-zA-Z]*(?:token|Token|KEY|Key|secret|Secret)\s*='
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS Comments with Secrets
+    regex: '//.*(?:token|password|key|secret|api).*[:=]\s*["'']?([a-zA-Z0-9_\-]{10,})'
+    category: JavaScript Specific
+    severity: medium
+
+  - name: JS Import Secret
+    regex: 'import\s+.*from\s+["''].*(?:config|secret|key|token).*["'']'
+    category: JavaScript Specific
+    severity: medium
+
+  - name: JS Require Secret
+    regex: 'require\(["''].*(?:config|secret|key|token).*["'']\)'
+    category: JavaScript Specific
+    severity: medium
+
+  - name: JS Axios Auth
+    regex: 'axios\.(?:get|post|put|delete)\([^)]+(?:headers|auth)[^)]+\)'
+    category: JavaScript Specific
+    severity: medium
+
+  - name: JS Environment Variable
+    regex: 'process\.env\.[A-Z_]+(?:KEY|TOKEN|SECRET|PASSWORD)'
+    category: JavaScript Specific
+    severity: high
+
+  - name: JS Hardcoded URL with Key
+    regex: '(?:http|https)://[^"\s]*[?&](?:api[_\-]?key|token|auth)=[^&"\s]+'
+    category: JavaScript Specific
+    severity: high

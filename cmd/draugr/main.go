@@ -10,6 +10,7 @@ import (
 
 	"github.com/RowanDark/draugr/internal/config"
 	"github.com/RowanDark/draugr/internal/crawler"
+	"github.com/RowanDark/draugr/internal/patterns"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
@@ -80,13 +81,34 @@ func main() {
 
 			c := crawler.New(cfg, logger)
 
-			// Consume pages channel (Issue #3 will replace this)
+			// Build and load pattern registry
+			reg := patterns.New(logger)
+			if err := reg.Load(cfg.Patterns); err != nil {
+				return fmt.Errorf("patterns: %w", err)
+			}
+			logger.Info("patterns loaded", zap.Int("count", reg.Count()))
+
+			// findings channel — Issue #5 will replace the consumer below
+			findings := make(chan crawler.Finding, 200)
+
+			// Matcher goroutine: reads pages, runs patterns, emits findings
 			go func() {
+				defer close(findings)
 				for page := range c.Pages() {
-					logger.Info("fetched",
-						zap.String("url", page.URL),
-						zap.Int("status", page.StatusCode),
-						zap.Int("body_len", len(page.Body)),
+					for _, f := range reg.Match(page) {
+						findings <- f
+					}
+				}
+			}()
+
+			// Temporary findings consumer — replaced in Issue #5
+			go func() {
+				for f := range findings {
+					logger.Info("finding",
+						zap.String("pattern", f.Pattern),
+						zap.String("severity", f.Severity),
+						zap.String("url", f.PageURL),
+						zap.String("match", f.Match),
 					)
 				}
 			}()

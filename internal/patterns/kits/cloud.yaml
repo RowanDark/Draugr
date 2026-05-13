@@ -1,0 +1,51 @@
+kit: cloud
+patterns:
+  - name: S3 Bucket URL
+    regex: '(?:s3|s3-[a-z0-9-]+)\.amazonaws\.com/[a-z0-9][a-z0-9\-\.]{1,61}[a-z0-9]'
+    category: Cloud Storage & CDN
+    severity: high
+
+  - name: S3 Bucket Name
+    regex: '(?:s3://|s3\.amazonaws\.com/|s3-[a-z0-9-]+\.amazonaws\.com/)[a-z0-9][a-z0-9\-\.]{1,61}[a-z0-9]'
+    category: Cloud Storage & CDN
+    severity: high
+
+  - name: Google Cloud Storage
+    regex: '(?:storage\.googleapis\.com|gs://)/?[a-z0-9][a-z0-9\-\.]{1,61}[a-z0-9]'
+    category: Cloud Storage & CDN
+    severity: high
+
+  - name: Azure Blob Storage
+    regex: 'https://[a-z0-9]+\.blob\.core\.windows\.net'
+    category: Cloud Storage & CDN
+    severity: high
+
+  - name: Firebase Storage
+    regex: 'https://firebasestorage\.googleapis\.com'
+    category: Cloud Storage & CDN
+    severity: medium
+
+  - name: CloudFront Distribution
+    regex: '[a-z0-9]+\.cloudfront\.net'
+    category: Cloud Storage & CDN
+    severity: low
+
+  - name: CDN URL
+    regex: '(?:cdn|assets|static|media)\.[a-z0-9\-]+\.[a-z]+'
+    category: Cloud Storage & CDN
+    severity: low
+
+  - name: Dropbox Share Link
+    regex: 'https://www\.dropbox\.com/s/[a-z0-9]+'
+    category: Cloud Storage & CDN
+    severity: medium
+
+  - name: Google Drive Link
+    regex: 'https://drive\.google\.com/(?:file/d/|open\?id=)[a-zA-Z0-9_-]+'
+    category: Cloud Storage & CDN
+    severity: medium
+
+  - name: OneDrive Link
+    regex: 'https://1drv\.ms/[a-z]/[a-zA-Z0-9!_-]+'
+    category: Cloud Storage & CDN
+    severity: medium

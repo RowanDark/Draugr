@@ -1,0 +1,106 @@
+kit: endpoints
+patterns:
+  - name: Admin Panel
+    regex: '/(admin|administrator|wp-admin|backend|manage|portal|dashboard|control-panel)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: API Endpoints
+    regex: '/api/(?:v[0-9]+/)?[a-z]+'
+    category: Common Endpoints
+    severity: low
+
+  - name: GraphQL Endpoint
+    regex: '/graphql'
+    category: Common Endpoints
+    severity: low
+
+  - name: Config Files
+    regex: '\.(env|config|conf|cfg|ini|properties|yml|yaml|toml)(\?|$)'
+    category: Common Endpoints
+    severity: high
+
+  - name: Backup Files
+    regex: '\.(bak|backup|old|orig|original|~|save|swp)(\?|$)'
+    category: Common Endpoints
+    severity: high
+
+  - name: Database Files
+    regex: '\.(sql|db|sqlite|sqlite3|mdb|accdb)(\?|$)'
+    category: Common Endpoints
+    severity: high
+
+  - name: Log Files
+    regex: '\.(log|logs|out|err|error)(\?|$)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Archive Files
+    regex: '\.(zip|tar|gz|rar|7z|bz2|xz)(\?|$)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Source Code
+    regex: '\.(php|asp|aspx|jsp|py|rb|pl|cgi)(\?|$)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Git Files
+    regex: '\.git(?:ignore|config|/)?'
+    category: Common Endpoints
+    severity: high
+
+  - name: SVN Files
+    regex: '\.svn(?:/)?'
+    category: Common Endpoints
+    severity: high
+
+  - name: IDE Files
+    regex: '\.(idea|vscode|project)(?:/)?'
+    category: Common Endpoints
+    severity: low
+
+  - name: Package Files
+    regex: '(?:package\.json|composer\.json|requirements\.txt|Gemfile)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Build Files
+    regex: '(?:webpack\.config|gulpfile|Gruntfile|Makefile)'
+    category: Common Endpoints
+    severity: low
+
+  - name: CI/CD Files
+    regex: '(?:\.gitlab-ci\.yml|\.travis\.yml|Jenkinsfile|\.circleci)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Docker Files
+    regex: '(?:Dockerfile|docker-compose\.yml)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Kubernetes Files
+    regex: '(?:k8s|kubernetes)\.ya?ml'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Debug Endpoints
+    regex: '/(debug|test|staging|dev|development)'
+    category: Common Endpoints
+    severity: medium
+
+  - name: PHPInfo
+    regex: '/phpinfo\.php'
+    category: Common Endpoints
+    severity: high
+
+  - name: Server Status
+    regex: '/server-status'
+    category: Common Endpoints
+    severity: medium
+
+  - name: Hidden Directories
+    regex: '/\.[a-z]+(?:/)?'
+    category: Common Endpoints
+    severity: low

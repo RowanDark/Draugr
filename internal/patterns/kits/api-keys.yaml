@@ -1,0 +1,226 @@
+kit: api-keys
+patterns:
+  - name: Generic API Key
+    regex: '(?i)(?:api[_\-\s]?key|apikey|api[_\-\s]?secret|api[_\-\s]?token)[\s:=]+["'']?([a-zA-Z0-9_\-]{20,})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Bearer Token
+    regex: '(?i)bearer\s+([a-zA-Z0-9_\-\.]+)'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: AWS Access Key ID
+    regex: '(?:A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[0-9A-Z]{16}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: AWS Secret Key
+    regex: '(?i)aws[_\-\s]?(?:secret[_\-\s]?)?(?:access[_\-\s]?)?key[\s:=]+["'']?([a-zA-Z0-9/+=]{40})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: AWS Session Token
+    regex: '(?i)aws[_\-\s]?session[_\-\s]?token[\s:=]+["'']?([a-zA-Z0-9/+=]+)["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: AWS MWS Key
+    regex: 'amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Google API Key
+    regex: 'AIza[0-9A-Za-z\-_]{35}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Google OAuth
+    regex: '(?i)(?:google|gcp|youtube|drive|yt)(?:.|_|-)?(?:api|app|oauth)?(?:.|_|-)key[\s:=]+["'']?([a-zA-Z0-9\-_]{20,})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Google Cloud Platform API
+    regex: '(?i)(?:google|gcp|g-cloud)[_\-\s]?(?:api[_\-\s]?)?(?:key|token)[\s:=]+["'']?([a-zA-Z0-9\-_.]{20,})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Firebase URL
+    regex: 'https://[a-z0-9\-]+\.firebaseio\.com'
+    category: API Keys & Secrets
+    severity: medium
+
+  - name: Google Service Account
+    regex: '(?i)(?:service[_\-\s]?account)[^"]*?(?:\.json|private_key)'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Azure Subscription Key
+    regex: '(?i)(?:azure|microsoft)[_\-\s]?(?:subscription[_\-\s]?)?key[\s:=]+["'']?([a-zA-Z0-9]{32})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Azure Storage Key
+    regex: '(?i)(?:azure|storage)[_\-\s]?(?:account[_\-\s]?)?key[\s:=]+["'']?([a-zA-Z0-9+/]{86}==)["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: GitHub Token
+    regex: '(?:ghp|gho|ghu|ghs|ghr)_[a-zA-Z0-9]{36}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: GitHub OAuth
+    regex: '(?i)github[_\-\s]?(?:oauth[_\-\s]?)?(?:token|key)[\s:=]+["'']?([a-zA-Z0-9_]{40})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: GitLab Token
+    regex: '(?:glpat|glptt)-[a-zA-Z0-9\-_]{20}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Bitbucket Client ID
+    regex: '(?i)bitbucket[_\-\s]?(?:client[_\-\s]?)?id[\s:=]+["'']?([a-zA-Z0-9]{20,})["'']?'
+    category: API Keys & Secrets
+    severity: medium
+
+  - name: Slack Token
+    regex: 'xox[baprs]-[0-9]{10,12}-[0-9]{10,12}-[a-zA-Z0-9]{24,32}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Slack Webhook
+    regex: 'https://hooks\.slack\.com/services/T[A-Z0-9]+/B[A-Z0-9]+/[a-zA-Z0-9]+'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Discord Token
+    regex: '(?:discord[_\-\s]?(?:bot[_\-\s]?)?token[\s:=]+["'']?)?([MN][a-zA-Z0-9]{23}\.[a-zA-Z0-9]{6}\.[a-zA-Z0-9]{27})'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Discord Webhook
+    regex: 'https://discord(?:app)?\.com/api/webhooks/[0-9]+/[a-zA-Z0-9_\-]+'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Telegram Bot Token
+    regex: '[0-9]{8,10}:[a-zA-Z0-9_-]{35}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Twilio API Key
+    regex: 'SK[a-z0-9]{32}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Twilio Account SID
+    regex: 'AC[a-z0-9]{32}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Stripe API Key
+    regex: '(?:sk|pk)_(?:test|live)_[a-zA-Z0-9]{24,}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Stripe Restricted Key
+    regex: 'rk_(?:test|live)_[a-zA-Z0-9]{24,}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: PayPal/Braintree Token
+    regex: 'access_token[\s:=]+[a-zA-Z0-9\-\.]+'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Square OAuth Secret
+    regex: 'sq0csp-[a-zA-Z0-9\-_]{43}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Square Access Token
+    regex: 'sqOatp-[a-zA-Z0-9\-_]{22}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Coinbase Access Token
+    regex: '(?i)coinbase[_\-\s]?(?:api[_\-\s]?)?(?:key|token)[\s:=]+["'']?([a-zA-Z0-9]{32,})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Facebook App ID
+    regex: '(?i)(?:facebook|fb)[_\-\s]?(?:app[_\-\s]?)?id[\s:=]+["'']?([0-9]{13,17})["'']?'
+    category: API Keys & Secrets
+    severity: medium
+
+  - name: Facebook Secret
+    regex: '(?i)(?:facebook|fb)[_\-\s]?(?:app[_\-\s]?)?secret[\s:=]+["'']?([a-f0-9]{32})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Facebook Access Token
+    regex: 'EAA[a-zA-Z0-9]+'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Twitter API Key
+    regex: '(?i)twitter[_\-\s]?(?:api[_\-\s]?)?key[\s:=]+["'']?([a-zA-Z0-9]{25})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Twitter Bearer Token
+    regex: '(?i)twitter[_\-\s]?bearer[_\-\s]?token[\s:=]+["'']?([a-zA-Z0-9%]{100,})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Mailgun API Key
+    regex: 'key-[a-zA-Z0-9]{32}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Mailchimp API Key
+    regex: '[a-z0-9]{32}-us[0-9]{1,2}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: SendGrid API Key
+    regex: 'SG\.[a-zA-Z0-9_\-]{22}\.[a-zA-Z0-9_\-]{43}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Dropbox API Token
+    regex: '(?i)dropbox[_\-\s]?(?:api[_\-\s]?)?(?:token|key)[\s:=]+["'']?([a-zA-Z0-9]{64,})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Heroku API Key
+    regex: '(?i)heroku[_\-\s]?(?:api[_\-\s]?)?key[\s:=]+["'']?([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})["'']?'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: MapBox API Key
+    regex: 'pk\.[a-zA-Z0-9]{60,}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: JWT Token
+    regex: 'ey[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}(?:\.[A-Za-z0-9_-]{10,})?'
+    category: API Keys & Secrets
+    severity: medium
+
+  - name: NPM Token
+    regex: 'npm_[a-zA-Z0-9]{36}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Artifactory API Token
+    regex: 'AKC[a-zA-Z0-9]{10,}'
+    category: API Keys & Secrets
+    severity: high
+
+  - name: Artifactory Password
+    regex: 'AP[a-zA-Z0-9]{11,}'
+    category: API Keys & Secrets
+    severity: high
