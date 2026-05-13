@@ -117,8 +117,8 @@ func main() {
 				return fmt.Errorf("crawler: %w", err)
 			}
 
-			// Wait for pages channel to close (crawl complete or ctx cancelled)
-			for range c.Pages() {}
+			// Wait for findings pipeline to drain (findings closes after pages closes)
+			for range findings {}
 
 			return nil
 		},
